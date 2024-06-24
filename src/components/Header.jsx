@@ -1,8 +1,21 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
+
+let initialTheme
+
+if (localStorage.getItem("countries-theme") === null) {
+    localStorage.setItem("countries-theme", "white")
+    document.documentElement.setAttribute("theme", "white")
+    initialTheme = "Dark Mode"
+} else {
+    const scheme = localStorage.getItem("countries-theme")
+    document.documentElement.setAttribute("theme", scheme)
+    if(scheme === "white") initialTheme = "Dark Mode"
+    else initialTheme = "Light Mode"
+}
 
 export default function Header() {
 
-    const [theme, setTheme] = useState("")
+    const [theme, setTheme] = useState(initialTheme)
 
     const changeTheme = () => {
         if (localStorage.getItem("countries-theme") === "dark") {
@@ -16,19 +29,6 @@ export default function Header() {
             setTheme("Light Mode")
         }
     }
-
-    useEffect(() => {
-        if (localStorage.getItem("countries-theme") === null) {
-            localStorage.setItem("countries-theme", "white")
-            document.documentElement.setAttribute("theme", "white")
-            setTheme("Dark Mode")
-        } else {
-            const scheme = localStorage.getItem("countries-theme")
-            document.documentElement.setAttribute("theme", scheme)
-            if(scheme === "white") setTheme("Dark Mode")
-            else setTheme("Light Mode")
-        }
-    }, [])
 
     return (
         <header>
