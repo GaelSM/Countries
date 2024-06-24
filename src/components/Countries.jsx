@@ -3,10 +3,9 @@ import data from "@/data.json"
 import Card from "@components/Card"
 
 export default function Countries() {
-
     const [countryName, setCountryName] = useState("")
     const [region, setRegion] = useState("")
-    const [countriesData, setCountriesData] = useState(data)
+    const [countriesData] = useState(data)
 
     const dataRef = useRef(countriesData)
 

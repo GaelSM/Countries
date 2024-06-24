@@ -8,6 +8,7 @@ export default function Country() {
     const currentCountryCode = pathname.split("/")[1]
     const country = data.find(element => element.alpha2Code === currentCountryCode)
 
+    const population = new Intl.NumberFormat().format(country.population)
 
     return (
         <main className="country">
@@ -26,7 +27,7 @@ export default function Country() {
                         <div className="data">
                             <div>
                                 <p><span>Native Name:</span> {country.nativeName} </p>
-                                <p><span>Population:</span> {new Intl.NumberFormat().format(country.population)} </p>
+                                <p><span>Population:</span> { population } </p>
                                 <p><span>Region:</span> {country.region} </p>
                                 <p><span>Sub Region:</span> {country.subregion} </p>
                                 <p><span>Capital:</span> {country.capital} </p>
@@ -36,11 +37,11 @@ export default function Country() {
                                 <p>
                                     <span>Currencies:</span> {country.currencies && country.currencies[0].name} 
                                 </p>
-                                <p><span>Languages: </span>
+                                <p>
+                                    <span>Languages: </span>
                                     {
-                                        country.languages?.map(({ name }, index) => country.languages.length - 1 === index
-                                            ? name
-                                            : name + ", "
+                                        country.languages?.map(({ name }, index) => 
+                                            country.languages.length - 1 === index ? name : name + ", "
                                         )
                                     }
                                 </p>
