@@ -1,17 +1,12 @@
 import { useLocation, Link } from "react-router-dom"
-import { useEffect, useState } from "react"
 import data from "@/data.json"
 
 export default function Country() {
 
     const { pathname } = useLocation()
-    const [country, setCountry] = useState({})
 
-    useEffect(() => {
-        const currentCountryCode = pathname.split("/")[1]
-        const currentCountry = data.find(element => element.alpha2Code === currentCountryCode)
-        setCountry(currentCountry)
-    }, [])
+    const currentCountryCode = pathname.split("/")[1]
+    const country = data.find(element => element.alpha2Code === currentCountryCode)
 
 
     return (
